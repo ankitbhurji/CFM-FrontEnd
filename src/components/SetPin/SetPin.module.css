@@ -6,14 +6,12 @@
     outline: solid 1px black;
     /* display: flex;
     justify-content: center;
-    align-items: center;
-    display: flex; */
+    align-items: center; */
     background-color: white;
     margin-top: auto;
     margin-bottom: auto;
 }
 .inputContainer{
-    /* background-color: red; */
     margin-left: 40px;
     margin-right: 40px;
     margin-top: 40px;

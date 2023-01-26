@@ -16,12 +16,8 @@
 }
 
 .lock{
-    /* width: 100px; */
     width: auto;
-    /* height: 100px; */
     height: auto;
-    /* border-radius: 50%; */
-    /* background-color: white; */
 }
 .name{
     color: 
@@ -41,7 +37,6 @@
     border: 2px solid #445EE2;
     background-color: #445EE2;
     color: white;
-    /* width: 120px; */
     width: 150px;
     height: 40px;
     border-radius: 5px;

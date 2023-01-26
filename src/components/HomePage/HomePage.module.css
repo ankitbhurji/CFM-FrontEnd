@@ -61,14 +61,11 @@
     font-size: 14px;
     font-family: DM sans-serif;
     font-weight: bold;
-    /* letter-spacing: -2px; */
-    /* padding-top: 5px; */
     margin: auto;
     margin-left: 12px;
 }
 
 .addedFolders{
-    /* background-color: cyan; */
     margin-top: 30px;
     margin-bottom: 10px;
     height: 320px;
