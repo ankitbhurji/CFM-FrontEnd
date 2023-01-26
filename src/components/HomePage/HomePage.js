@@ -5,8 +5,12 @@ import folder from '../../Images/folder.svg'
 import lock from '../../Images/lock.svg'
 import set from '../../Images/set.svg'
 import logout from '../../Images/logout.svg'
+import React from 'react';
 
 function HomePage() {
+
+    const [modalShow, setModalShow] = React.useState(false);
+
     return ( 
         <div className='d-flex'>
             <div className={styles.LeftSidebarContainer}>
@@ -46,7 +50,7 @@ function HomePage() {
             <div className={styles.RightContainer}>
                      <div className={styles.right}>
                         <div className='d-flex'>
-                            <button className={styles.buttonSetting}><img src={set} /></button>
+                            <button onClick={() => setModalShow(true)} className={styles.buttonSetting}><img src={set} /></button>
                             <button className={styles.buttonLogout}><img src={logout}/></button>
                         </div>
                      </div>

@@ -1,8 +1,8 @@
 .HomeContainer{
     /* color: red; */
-    /* height: 100vh; */
+    height: 100vh;
     padding: 40px;
     display: flex;
     justify-content: center;
-    background-color: gray;
+    background-color: rgb(129, 129, 129, 0.4);
 }
