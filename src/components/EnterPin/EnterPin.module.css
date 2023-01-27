@@ -49,4 +49,9 @@
     transition: 0.6s;
 }
 
-
+.warning{
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}

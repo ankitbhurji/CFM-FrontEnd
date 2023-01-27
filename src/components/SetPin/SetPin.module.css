@@ -1,6 +1,6 @@
 .LockContainer{
     width: 400px;
-    height: 350px;
+    height: 380px;
     border-radius: 10px;
     margin: 50px;
     outline: solid 1px black;
@@ -33,7 +33,7 @@ label{
     margin-bottom: 6px;
     color: #566474;
 }
-input[type="password"]{
+input[type="password"], [type='text']{
     outline: none;
     border: 1px solid #9EAAB7;
     border-radius: 4px;
@@ -44,7 +44,7 @@ input[type="password"]{
 
 
 .ChangeButton{
-    margin-top: 25px;
+    margin-top: 35px;
     border: none;
     /* border: 2px solid #445EE2; */
     background-color: #142683;
@@ -60,5 +60,15 @@ input[type="password"]{
     letter-spacing: 2px;
     transition: 0.6s;
 } 
-
-
+.warning{
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.success{
+    text-align: center;
+    margin-top: 10px;
+    color:  RGB(25, 135, 84);
+    font-weight: bold;
+}
