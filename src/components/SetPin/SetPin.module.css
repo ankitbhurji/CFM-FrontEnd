@@ -1,12 +1,29 @@
+.demo{
+    position: fixed;
+    background-color: rgba(30, 39, 46, 0.9);
+    height: 89vh;
+    width: 1280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    animation: mymove 0.4s ;
+    animation-timing-function: linear;
+    }
+@keyframes mymove {
+    from {left: 0px;}
+    to {left: 130px;}
+}
 .LockContainer{
     width: 400px;
     height: 380px;
     border-radius: 10px;
     margin: 50px;
     outline: solid 1px black;
-    /* display: flex;
+    display: flex;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
     background-color: white;
     margin-top: auto;
     margin-bottom: auto;
@@ -33,7 +50,7 @@ label{
     margin-bottom: 6px;
     color: #566474;
 }
-input[type="password"], [type='text']{
+input[type="password"], [type='text'], [type='tel']{
     outline: none;
     border: 1px solid #9EAAB7;
     border-radius: 4px;
