@@ -9,14 +9,16 @@ import React, { useEffect, useState } from 'react';
 // import EnterFolder from '../EnterFolder/EnterFolder';
 import addFolder from '../../Images/addFolder.svg';
 import axios from "axios";
-
-
+import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function HomePage(props) {
 
+    const navigate = useNavigate();
+    let [searchParams, setSearchParams] = useSearchParams();
     // const [selectedFolder, setSelectedFolder] = useState('')
     const [foldersName, setFoldersName] = useState([])
-    const [selectedFolderName, setSelectedFoldername] = useState({
+    const [selectedFolderName, setSelectedFolderName] = useState({
         selectedName:'',
         isSelectedActive:false,
         isWarningKey:false
@@ -34,15 +36,22 @@ function HomePage(props) {
     function clickAddFolderButton(){
         props.lockKey({isFolderKey:true, isFileKey:false})
     }
-    // function clickFolderSelect(data){
-    //     console.log(data)
-    // }
+    async function clickFolderSelect(data){
+        setSelectedFolderName({...selectedFolderName, selectedName:data.folderName, isWarningKey:false})
+        // setSearchParams({folderName:data.folderName})
+        // navigate(`/${data.folderName}`)
+        const url = 'http://localhost:3001/api/folder'
+        await axios.post(url, {
+            selectedFolder:data.folderName
+        });
+        // console.log(selectedFolderName.selectedName)
+    }
     function clickAddFileButton(){
         console.log(selectedFolderName.selectedName==='')
         if(!(selectedFolderName.selectedName==='')){
             props.lockKey({isFolderKey:false, isFileKey:true})
         }else{
-            setSelectedFoldername({...selectedFolderName, isWarningKey:true})
+            setSelectedFolderName({...selectedFolderName, isWarningKey:true})
         }
     }
 
@@ -60,6 +69,7 @@ function HomePage(props) {
         }).catch(err => console.log(err))
     }, [props])
 
+   
 
     return ( 
        <div className={styles.demo}>
@@ -91,7 +101,7 @@ function HomePage(props) {
                         {
                             foldersName.map((data, index)=>{
                                 return(
-                                    <button onClick={()=>{setSelectedFoldername({...selectedFolderName, selectedName:data.folderName, isWarningKey:false})}} className={selectedFolderName.isSelectedActive?(`${styles.addFolder} ${styles.addFolderActive}`):(styles.addFolder)}>
+                                    <button onClick={()=>{clickFolderSelect(data)}} className={selectedFolderName.isSelectedActive?(`${styles.addFolder} ${styles.addFolderActive}`):(styles.addFolder)}>
                                         <div className='d-flex'>
                                             <div><img src={addFolder} /></div>
                                             <div className='ms-3 mt-1'>{data.folderName}</div>

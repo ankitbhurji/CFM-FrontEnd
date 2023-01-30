@@ -1,14 +1,24 @@
 import styles from './AddFile.module.css'
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function AddFile(props) {
 
     const [file, setFile] = useState({
-        fileName:''
+        fileName:'',
+        isWarningKey:false
       })
 
-    function clickButton(){
+    async function clickButton(){
+      if(!(file.fileName==='')){
+        const url = 'http://localhost:3001/api/folder'
+        await axios.post(url, {
+          fileName:file.fileName
+        })
         props.lockKey({isFolderKey:false, isFileKey:false, isEditKey:true})
+      }else{
+        setFile({...file, isWarningKey:true})
+      }
     }
     
     return ( 
@@ -22,13 +32,13 @@ function AddFile(props) {
                     <div className='row'>
                       <label>Enter File Name</label>
                       <div>
-                      <input onChange={(e)=>{setFile({...file, fileName:e.target.value})}} value={file.fileName} type="text" />
+                      <input onChange={(e)=>{setFile({...file, fileName:e.target.value, isWarningKey:false})}} value={file.fileName} type="text" />
                       </div>
                     </div>
                     <div className='row'>
                       <button onClick={clickButton} type='submit' className={styles.ChangeButton}>Create now</button>
                     </div>
-                      {/* {pin.isWarningKey?(<p className={styles.warning}>pin does't match</p>):pin.isUpdateKey?(<p className={styles.success}>pin updated successfully !</p>):pin.isBlank?(<p className={styles.warning}>please enter the pin</p>):('')} */}
+                      {file.isWarningKey?(<p className={styles.warning}>add file name</p>):('')}
                   </div>
             </div>
           </div>
