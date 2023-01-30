@@ -5,13 +5,22 @@ import folder from '../../Images/folder.svg'
 import lock from '../../Images/lock.svg'
 import set from '../../Images/set.svg'
 import logout from '../../Images/logout.svg'
-import React, { useState } from 'react';
-import EnterFolder from '../EnterFolder/EnterFolder';
+import React, { useEffect, useState } from 'react';
+// import EnterFolder from '../EnterFolder/EnterFolder';
 import addFolder from '../../Images/addFolder.svg';
+import axios from "axios";
 
 
 
 function HomePage(props) {
+
+    // const [selectedFolder, setSelectedFolder] = useState('')
+    const [foldersName, setFoldersName] = useState([])
+    const [selectedFolderName, setSelectedFoldername] = useState({
+        selectedName:'',
+        isSelectedActive:false,
+        isWarningKey:false
+    })
 
     function clickLockButton(){
         props.lockKey({isLockKey:false, isEnterPinKey:true, isSetPinKey:false,});
@@ -25,7 +34,32 @@ function HomePage(props) {
     function clickAddFolderButton(){
         props.lockKey({isFolderKey:true, isFileKey:false})
     }
-  
+    // function clickFolderSelect(data){
+    //     console.log(data)
+    // }
+    function clickAddFileButton(){
+        console.log(selectedFolderName.selectedName==='')
+        if(!(selectedFolderName.selectedName==='')){
+            props.lockKey({isFolderKey:false, isFileKey:true})
+        }else{
+            setSelectedFoldername({...selectedFolderName, isWarningKey:true})
+        }
+    }
+
+    // async function getPasswords(){
+    //     const url = 'http://localhost:3001/api/folder'
+    //     const folders = await axios.get(url);
+    //     setFoldersName(folders.data)
+    // }
+
+    useEffect(()=>{
+        // getPasswords()
+        const url = 'http://localhost:3001/api/folder'
+        axios.get(url).then(res => {
+            setFoldersName(res.data)
+        }).catch(err => console.log(err))
+    }, [props])
+
 
     return ( 
        <div className={styles.demo}>
@@ -37,7 +71,7 @@ function HomePage(props) {
                 </div>
                 <div className='row'>
                     <div className='d-flex'>
-                        <button className={styles.buttonFile}>
+                        <button onClick={clickAddFileButton} className={styles.buttonFile}>
                             <div className='d-flex'>
                                 <div className={styles.file}><img src={file} /></div>
                                 <div className={styles.name}>Add file</div>
@@ -50,63 +84,22 @@ function HomePage(props) {
                             </div>
                         </button>
                     </div>
+                    {selectedFolderName.isWarningKey?(<p className={styles.warning}>folder is not selected !</p>):('')}
                 </div>
                 <div className='row'>
                     <div className={styles.folderContainer}>
-                        <button className={styles.addFolder}>
-                            <div className='d-flex'>
-                                <div><img src={addFolder} /></div>
-                                <div className='ms-3 mt-1'>folder name</div>
-                            </div>
-                        </button>
-                        <button className={styles.addFolder}>
-                            <div className='d-flex'>
-                                <div><img src={addFolder} /></div>
-                                <div className='ms-3 mt-1'>folder name</div>
-                            </div>
-                        </button>
-                        <button className={styles.addFolder}>
-                            <div className='d-flex'>
-                                <div><img src={addFolder} /></div>
-                                <div className='ms-3 mt-1'>folder name</div>
-                            </div>
-                        </button>
-                        <button className={styles.addFolder}>
-                            <div className='d-flex'>
-                                <div><img src={addFolder} /></div>
-                                <div className='ms-3 mt-1'>folder name</div>
-                            </div>
-                        </button>
-                        <button className={styles.addFolder}>
-                            <div className='d-flex'>
-                                <div><img src={addFolder} /></div>
-                                <div className='ms-3 mt-1'>folder name</div>
-                            </div>
-                        </button>
-                        <button className={styles.addFolder}>
-                            <div className='d-flex'>
-                                <div><img src={addFolder} /></div>
-                                <div className='ms-3 mt-1'>folder name</div>
-                            </div>
-                        </button>
-                        <button className={styles.addFolder}>
-                            <div className='d-flex'>
-                                <div><img src={addFolder} /></div>
-                                <div className='ms-3 mt-1'>folder name</div>
-                            </div>
-                        </button>
-                        <button className={styles.addFolder}>
-                            <div className='d-flex'>
-                                <div><img src={addFolder} /></div>
-                                <div className='ms-3 mt-1'>folder name</div>
-                            </div>
-                        </button>
-                        <button className={styles.addFolder}>
-                            <div className='d-flex'>
-                                <div><img src={addFolder} /></div>
-                                <div className='ms-3 mt-1'>folder name</div>
-                            </div>
-                        </button>
+                        {
+                            foldersName.map((data, index)=>{
+                                return(
+                                    <button onClick={()=>{setSelectedFoldername({...selectedFolderName, selectedName:data.folderName, isWarningKey:false})}} className={selectedFolderName.isSelectedActive?(`${styles.addFolder} ${styles.addFolderActive}`):(styles.addFolder)}>
+                                        <div className='d-flex'>
+                                            <div><img src={addFolder} /></div>
+                                            <div className='ms-3 mt-1'>{data.folderName}</div>
+                                        </div>
+                                    </button>
+                                )
+                            })
+                        }
                     </div>
                 </div>
                 <div className='row'>
@@ -126,7 +119,7 @@ function HomePage(props) {
                         </div>
                      </div>
                      <div className={styles.folderName}>
-                        folder name /
+                        {`${selectedFolderName.selectedName} /`} 
                      </div>
                      <div className={styles.border}></div>
                      {/* all added file section */}

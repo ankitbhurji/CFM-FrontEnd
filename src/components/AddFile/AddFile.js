@@ -1,26 +1,28 @@
+import styles from './AddFile.module.css'
 import React, { useState } from 'react';
-import styles from './EnterFolder.module.css'
 
-function EnterFolder() {
+function AddFile(props) {
 
-  const [folder, setFolder] = useState({
-    folderName:''
-  })
-  function clickButton(){
-    console.log('clicked')
-  }
+    const [file, setFile] = useState({
+        fileName:''
+      })
 
+    function clickButton(){
+        props.lockKey({isFolderKey:false, isFileKey:false, isEditKey:true})
+    }
+    
     return ( 
-          <div className={styles.folderContainer}>
+        
+            <div className={styles.folderContainer}>
             <div className={styles.LockContainer}>
               <div className={styles.inputContainer}>
                 <div className='row'>
-                    <div className={styles.setName}><p>Create Folder</p></div>
+                    <div className={styles.setName}><p>Create File</p></div>
                     </div>
                     <div className='row'>
-                      <label>Enter Folder Name</label>
+                      <label>Enter File Name</label>
                       <div>
-                      <input onChange={(e)=>{setFolder(e.target.value)}} value={folder.folderName} type="text" />
+                      <input onChange={(e)=>{setFile({...file, fileName:e.target.value})}} value={file.fileName} type="text" />
                       </div>
                     </div>
                     <div className='row'>
@@ -30,8 +32,8 @@ function EnterFolder() {
                   </div>
             </div>
           </div>
-                
+  
      );
 }
 
-export default EnterFolder;
+export default AddFile;

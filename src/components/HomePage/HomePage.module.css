@@ -90,6 +90,16 @@
     border: none;
     width: 100%;
 }
+.addFolderActive{
+    background-color: #010934;
+}
+.warning{
+    color: red;
+    /* text-align: center; */
+    /* margin-top: 10px; */
+    font-weight: bold;
+    position: fixed;
+}
 
 .buttonLock{
     /* width: auto; */

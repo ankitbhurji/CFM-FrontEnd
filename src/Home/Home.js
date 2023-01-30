@@ -3,7 +3,9 @@ import EnterPin from '../components/EnterPin/EnterPin';
 import styles from './Home.module.css'
 import SetPin from '../components/SetPin/SetPin';
 import { useEffect, useState } from 'react';
-import EnterFolder from '../components/EnterFolder/EnterFolder';
+import AddFolder from '../components/AddFolder/AddFolder';
+import AddFile from '../components/AddFile/AddFile';
+import EditFile from '../components/EditFile/EditFile';
 
 function Home() {
 
@@ -12,9 +14,12 @@ function Home() {
         isEnterPinKey:false, 
         isSetPinKey:false,
         isFolderKey:false, 
-        isFileKey:false
+        isFileKey:false, 
+        isEditKey:false
     })
     console.log(keys)
+
+ 
     
     return ( 
         <div >
@@ -23,17 +28,22 @@ function Home() {
             {/* {keys.isLockKey?(<EnterPin />):(<HomePage keys={setKeys}/>)} */}
             {/* {!lockKey.isLockKey?(<HomePage lockKey={setLockKey}/>):(<EnterPin />)} */}
             {/* <HomePage lockKey={setKeys} /> */}
-            {/* <EnterFolder/> */}
-            {/* {keys.isFolderKey?(<EnterFolder/>):("")} */}
+            {/* <AddFolder/> */}
+            {/* {keys.isFolderKey?(<AddFolder/>):("")} */}
 
             <HomePage lockKey={setKeys}/>
+            {/* <EditFile/> */}
 
             {
             keys.isEnterPinKey?(<EnterPin lockKey={setKeys}/>)
             :
             keys.isSetPinKey?(<SetPin />)
             :
-            keys.isFolderKey?(<EnterFolder/>)
+            keys.isFolderKey?(<AddFolder lockKey={setKeys}/>)
+            :
+            keys.isFileKey?(<AddFile lockKey={setKeys}/>)
+            :
+            keys.isEditKey?(<EditFile/>)
             :
             ("")
             }
