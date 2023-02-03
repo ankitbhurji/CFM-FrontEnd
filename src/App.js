@@ -6,7 +6,7 @@ function App() {
       <Routes>
         {/* <Home /> */}
         <Route path="/"  element={<Home />}/>
-        {/* <Route path="/:id"  element={<Home />}/> */}
+        <Route path="/:id"  element={<Home />}/>
       </Routes>
     </div>
   );

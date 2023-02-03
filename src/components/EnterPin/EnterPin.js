@@ -61,7 +61,6 @@ function EnterPin(props) {
                         <div className={styles.name}><p>Enter Account Pin</p></div>
                     </div>
                     <div  className='row'>
-                        {/* <div>password</div> */}
                         <OtpInput className={styles.otp}
                         // value={otp}
                         value={password.passcode}
@@ -95,7 +94,13 @@ function EnterPin(props) {
                     <div  className='row'>
                         <button onClick={clickButton} className={styles.passcodeButton}>Enter</button>
                     </div>
-                    {password.isWarningKey?(<p className={styles.warning}>incorrect pin !</p>):password.isBlank?(<p className={styles.warning}>please enter the pin !</p>):('')}
+                    {
+                        password.isWarningKey?(<p className={styles.warning}>incorrect pin !</p>)
+                        :
+                        password.isBlank?(<p className={styles.warning}>please enter the pin !</p>)
+                        :
+                        ('')
+                    }
                 </div>
             </div>
        </div>

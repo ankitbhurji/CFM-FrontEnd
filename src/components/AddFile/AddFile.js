@@ -1,26 +1,48 @@
 import styles from './AddFile.module.css'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function AddFile(props) {
 
     const [file, setFile] = useState({
         fileName:'',
-        isWarningKey:false
+        isWarningKey:false,
+        isExistKey:false
       })
+    const [fileData, setFileData] = useState([])
 
-    async function clickButton(){
+    function clickButton(){
       if(!(file.fileName==='')){
-        const url = 'http://localhost:3001/api/folder'
-        await axios.post(url, {
-          fileName:file.fileName
+        var test = fileData.filter((value)=>{
+          return value.fileName==file.fileName
         })
-        props.lockKey({isFolderKey:false, isFileKey:false, isEditKey:true})
+        if(test.length>0){
+          setFile({...file, isExistKey:true})
+        }else{
+          props.lockKey({
+            isFolderKey:false, 
+            isFileKey:false, 
+            isEditKey:true
+          })
+          props.fileName(file.fileName)
+        }
       }else{
         setFile({...file, isWarningKey:true})
       }
     }
-    
+
+    function clickChange(values){
+      setFile({
+        ...file, 
+        fileName:values, 
+        isWarningKey:false, 
+        isExistKey:false
+      })
+      setFileData(props.getFileNames)
+    }
+ 
+
+ 
     return ( 
         
             <div className={styles.folderContainer}>
@@ -32,13 +54,18 @@ function AddFile(props) {
                     <div className='row'>
                       <label>Enter File Name</label>
                       <div>
-                      <input onChange={(e)=>{setFile({...file, fileName:e.target.value, isWarningKey:false})}} value={file.fileName} type="text" />
+                      {/* <input onChange={(e)=>{setFile({...file, fileName:e.target.value, isWarningKey:false})}} value={file.fileName} type="text" /> */}
+                      <input onChange={(e)=>{clickChange(e.target.value)}} value={file.fileName} type="text" />
                       </div>
                     </div>
                     <div className='row'>
                       <button onClick={clickButton} type='submit' className={styles.ChangeButton}>Create now</button>
                     </div>
-                      {file.isWarningKey?(<p className={styles.warning}>add file name</p>):('')}
+                      {file.isWarningKey?(<p className={styles.warning}>add file name</p>)
+                      :
+                      file.isExistKey?(<p className={styles.warning}>file already exist</p>)
+                      :
+                      ('')}
                   </div>
             </div>
           </div>

@@ -6,68 +6,111 @@ import lock from '../../Images/lock.svg'
 import set from '../../Images/set.svg'
 import logout from '../../Images/logout.svg'
 import React, { useEffect, useState } from 'react';
-// import EnterFolder from '../EnterFolder/EnterFolder';
 import addFolder from '../../Images/addFolder.svg';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
+import uploadFile from '../../Images/uploadFile.svg';
+import searchIcon from '../../Images/searchIcon.svg'
 
 function HomePage(props) {
 
     const navigate = useNavigate();
     let [searchParams, setSearchParams] = useSearchParams();
-    // const [selectedFolder, setSelectedFolder] = useState('')
+
     const [foldersName, setFoldersName] = useState([])
+    const [folderName, setFolderName] = useState('')
+    const [fileNames, setFileNames] = useState([])
+    const [filePath, setFilePath] = useState('')
+    const [searchFile, setSearchFile] = useState([])
+    const [fileUpdatedData, setFileUpdatedData] = useState('')
     const [selectedFolderName, setSelectedFolderName] = useState({
-        selectedName:'',
+        selectedName:'/... /...',
         isSelectedActive:false,
         isWarningKey:false
     })
 
     function clickLockButton(){
-        props.lockKey({isLockKey:false, isEnterPinKey:true, isSetPinKey:false,});
+        props.lockKey({
+            isLockKey:false, 
+            isEnterPinKey:true, 
+            isSetPinKey:false
+        });
     }
     function clickSettingButton(){
-        props.lockKey({isLockKey:false, isEnterPinKey:false, isSetPinKey:true})
+        props.lockKey({
+            isLockKey:false, 
+            isEnterPinKey:false, 
+            isSetPinKey:true
+        })
     }
     function clickLogoutButton(){
-        props.lockKey({isLockKey:false, isEnterPinKey:true, isSetPinKey:false})
+        props.lockKey({isLockKey:false, 
+            isEnterPinKey:true, 
+            isSetPinKey:false
+        })
     }
     function clickAddFolderButton(){
-        props.lockKey({isFolderKey:true, isFileKey:false})
+        props.lockKey({
+            isFolderKey:true, 
+            isFileKey:false
+        })
     }
     async function clickFolderSelect(data){
-        setSelectedFolderName({...selectedFolderName, selectedName:data.folderName, isWarningKey:false})
-        // setSearchParams({folderName:data.folderName})
-        // navigate(`/${data.folderName}`)
-        const url = 'http://localhost:3001/api/folder'
-        await axios.post(url, {
-            selectedFolder:data.folderName
-        });
-        // console.log(selectedFolderName.selectedName)
+        const url = `http://localhost:3001/api/find/${data.folderName}`
+        const AllFiles = await axios.get(url)
+        setFileNames(AllFiles.data)
+        setFolderName(data.folderName)
+
+        setSelectedFolderName({
+            ...selectedFolderName, 
+            selectedName:data.folderName, 
+            isWarningKey:false
+        })
+        props.folderName(data.folderName)
+        setFilePath('')
     }
     function clickAddFileButton(){
-        console.log(selectedFolderName.selectedName==='')
-        if(!(selectedFolderName.selectedName==='')){
-            props.lockKey({isFolderKey:false, isFileKey:true})
+        if(!(selectedFolderName.selectedName==='/... /...')){
+            props.lockKey({
+                isFolderKey:false, 
+                isFileKey:true, 
+                updateKey:false
+            })
+            props.getFileNames(fileNames)
         }else{
-            setSelectedFolderName({...selectedFolderName, isWarningKey:true})
+            setSelectedFolderName({
+                ...selectedFolderName, 
+                isWarningKey:true
+            })
         }
     }
-
-    // async function getPasswords(){
-    //     const url = 'http://localhost:3001/api/folder'
-    //     const folders = await axios.get(url);
-    //     setFoldersName(folders.data)
-    // }
+    async function searchChange(searchFile){
+        const url = `http://localhost:3001/api/search/${searchFile}`
+        const search = await axios.get(url)
+        setSearchFile(search.data)
+    }
+    function clickOpenFile(files){
+        props.fileData({fileData:files})
+        props.lockKey({isFolderKey:false, isFileKey:false,isEditKey:true, updateKey:true})
+        // const url = `http://localhost:3001/api/update/${files.fileName}`
+        // console.log(fileUpdatedData)
+        console.log(files.fileName)
+    }
 
     useEffect(()=>{
-        // getPasswords()
         const url = 'http://localhost:3001/api/folder'
         axios.get(url).then(res => {
             setFoldersName(res.data)
         }).catch(err => console.log(err))
+
+        const urlUpdate = `http://localhost:3001/api/find/${folderName}`
+        axios.get(urlUpdate).then(res => {
+            setFileNames(res.data)
+        }).catch(err => console.log(err));
     }, [props])
+
+
 
    
 
@@ -128,23 +171,46 @@ function HomePage(props) {
                             <button onClick={clickLogoutButton} className={styles.buttonLogout}><img src={logout}/></button>
                         </div>
                      </div>
+                     <div>
+                        <input onChange={(e)=>{searchChange(e.target.value)}} type='search' placeholder='search...'/>
+                        <div className={styles.showFileds}>
+                            <ul>
+                                {
+                                    searchFile.map((fileValues)=>{
+                                        return(
+                                            <div>
+                                                <li onClick={()=>{clickOpenFile(fileValues)}} className='mb-1'>
+                                                    <button> <img src={searchIcon} className='me-2'/> {fileValues.fileName}</button>
+                                                </li>
+                                            </div>
+                                            
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
+                     </div>
                      <div className={styles.folderName}>
-                        {`${selectedFolderName.selectedName} /`} 
+                        {`${selectedFolderName.selectedName} / ${filePath}`} 
                      </div>
                      <div className={styles.border}></div>
-                     {/* all added file section */}
-                     {/* <div className={styles.fileContainer}>
+                     
+                     <div className={styles.fileContainer}>
                         <div className='row'>
-                            <div className='col-2 mt-5'>col1</div>
-                            <div className='col-2 mt-5'>col1</div>
-                            <div className='col-2 mt-5'>col1</div>
-                            <div className='col-2 mt-5'>col1</div>
-                            <div className='col-2 mt-5'>col1</div>
-                            <div className='col-2 mt-5'>col1</div>
-                            <div className='col-2 mt-5'>col1</div>
-                            <div className='col-2 mt-5'>col1</div>
+                            {
+                                fileNames.map((files)=>{
+                                    return(
+                                            <div className='col-2 mt-5'>
+                                                <button onClick={()=>{setFilePath(files.fileName)}} onDoubleClick={()=>{clickOpenFile(files)}} className={styles.file}>
+                                                    <div className={styles.uploadFileIcon}><img src={uploadFile} /></div>
+                                                    <div className={styles.fileName}>{files.fileName}</div>
+                                                </button>  
+                                            </div>
+                                    )
+                                })
+                            }
                         </div>
-                     </div> */}
+                     </div>
             </div>
         </div>
         </div>

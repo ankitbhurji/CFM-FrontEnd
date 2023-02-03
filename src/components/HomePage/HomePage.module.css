@@ -25,7 +25,7 @@
 }
 .buttonFile{
     border: none;
-    background-color: #E5E5E5;
+    /* background-color: #E5E5E5; */
     border: 2px solid #445EE2;
     /* width: 120px; */
     width: auto;
@@ -59,6 +59,7 @@
 .file{
     /* width: 20px; */
     /* padding: 10px; */
+    
 }
 .name{
     color: #445EE2;
@@ -89,6 +90,10 @@
     margin-bottom: 10px;
     border: none;
     width: 100%;
+    transition: 0.4s;
+}
+.addFolder:focus{
+    background-color: #2b313a;
 }
 .addFolderActive{
     background-color: #010934;
@@ -173,8 +178,77 @@
     background-color: white;
     padding-right: 40px;
 }
+input[type='search']{
+    margin-top: 42px;
+    width: 486px;
+    margin-left: 50px;
+    border: none;
+    outline: none;
+    border: 1px solid #566474;
+    height: 44px;
+    position: absolute;
+    background-image: url('../../Images/search.svg');
+    background-repeat: no-repeat;
+    padding-left: 55px;
+    background-size: 20px;
+    background-position: 14px 14px;
+    color: #1E272E;
+    font-weight: bold;
+    Font-family: DM Sans;
+    Font-size: 20px
+}
+.search{
+    margin-top: 42px;
+    /* margin-top: 42px;
+    width: 486px;
+    margin-left: 50px;
+    border: none;
+    outline: none;
+    border: 1px solid #566474;
+    height: 44px;
+    position: absolute; */
+    /* background-image: url('../../Images/search.svg');
+    background-repeat: no-repeat;
+    padding-left: 55px;
+    background-size: 20px;
+    background-position: 14px 14px; */
+}
+.showFileds{
+    /* background-color: #EBF0F5; */
+    opacity: 0.8;
+    width: 486px;
+    height: auto;
+    margin-top: 90px;
+    margin-left: 17px;
+    position: relative;
+    position: absolute; 
+}
+.showFileds button{
+    /* width: 100%; */
+    width: 486px;
+    /* margin-top: 2px; */
+    text-align: left;
+    border: none;
+    background-color: #E5E5E5;
+    list-style-type:none;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+.showFileds button:hover{
+    background-color: #cfcdcd;
+}
+.showFileds ul{
+    list-style-type: none;
+}
+
+.try{
+    margin-top: 100px;
+}
 .right{
     float: right;
+    
 }
 .buttonSetting{
     border: none;
@@ -225,4 +299,16 @@
 
 .fileContainer{
     margin-left: 50px;
+    /* background-color: red; */
+    height: 460px;
+    overflow: auto;
+    overflow-x: hidden;
+
+}
+.file{
+    text-align: center ;
+    border: none;
+    width: auto;
+    background-color: white;
+    /* padding: 10px 10px 0px 0px; */
 }
