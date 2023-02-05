@@ -15,9 +15,7 @@ import searchIcon from '../../Images/searchIcon.svg'
 
 function HomePage(props) {
 
-    const navigate = useNavigate();
-    let [searchParams, setSearchParams] = useSearchParams();
-
+    const [folderId, setFolderId] = useState('')
     const [foldersName, setFoldersName] = useState([])
     const [folderName, setFolderName] = useState('')
     const [fileNames, setFileNames] = useState([])
@@ -36,6 +34,7 @@ function HomePage(props) {
             isEnterPinKey:true, 
             isSetPinKey:false
         });
+        localStorage.setItem('localStatus', JSON.stringify(true));
     }
     function clickSettingButton(){
         props.lockKey({
@@ -49,6 +48,7 @@ function HomePage(props) {
             isEnterPinKey:true, 
             isSetPinKey:false
         })
+        localStorage.setItem('localStatus', JSON.stringify(null));
     }
     function clickAddFolderButton(){
         props.lockKey({
@@ -57,10 +57,11 @@ function HomePage(props) {
         })
     }
     async function clickFolderSelect(data){
-        const url = `http://localhost:3001/api/find/${data.folderName}`
+        const url = `http://localhost:3001/api/details/find/${data.folderName}`
         const AllFiles = await axios.get(url)
         setFileNames(AllFiles.data)
         setFolderName(data.folderName)
+        setFolderId(data)
 
         setSelectedFolderName({
             ...selectedFolderName, 
@@ -70,6 +71,8 @@ function HomePage(props) {
         props.folderName(data.folderName)
         setFilePath('')
     }
+
+
     function clickAddFileButton(){
         if(!(selectedFolderName.selectedName==='/... /...')){
             props.lockKey({
@@ -86,29 +89,34 @@ function HomePage(props) {
         }
     }
     async function searchChange(searchFile){
-        const url = `http://localhost:3001/api/search/${searchFile}`
-        const search = await axios.get(url)
-        setSearchFile(search.data)
+        if(searchFile.length){
+            const url = `http://localhost:3001/api/details/search/${searchFile}`
+            const search = await axios.get(url)
+            setSearchFile(search.data)
+        }
     }
     function clickOpenFile(files){
         props.fileData({fileData:files})
         props.lockKey({isFolderKey:false, isFileKey:false,isEditKey:true, updateKey:true})
-        // const url = `http://localhost:3001/api/update/${files.fileName}`
-        // console.log(fileUpdatedData)
-        console.log(files.fileName)
+        // console.log(files.fileName)
+        setSearchFile([]) // clear search data after click on search button
     }
 
     useEffect(()=>{
-        const url = 'http://localhost:3001/api/folder'
+        const url = 'http://localhost:3001/api/details/folder'
         axios.get(url).then(res => {
             setFoldersName(res.data)
         }).catch(err => console.log(err))
 
-        const urlUpdate = `http://localhost:3001/api/find/${folderName}`
-        axios.get(urlUpdate).then(res => {
-            setFileNames(res.data)
-        }).catch(err => console.log(err));
-    }, [props])
+        if(!(folderName=='')){
+            const urlUpdate = `http://localhost:3001/api/details/find/${folderName}`
+            axios.get(urlUpdate).then(res => {
+                setFileNames(res.data)
+            }).catch(err => console.log(err));
+            
+        }
+    }, [props, folderName])
+    // }, [props, foldersName, folderName])
 
 
 
@@ -144,7 +152,7 @@ function HomePage(props) {
                         {
                             foldersName.map((data, index)=>{
                                 return(
-                                    <button onClick={()=>{clickFolderSelect(data)}} className={selectedFolderName.isSelectedActive?(`${styles.addFolder} ${styles.addFolderActive}`):(styles.addFolder)}>
+                                    <button key={index} onClick={()=>{clickFolderSelect(data)}} className={data._id==folderId._id?(`${styles.addFolder} ${styles.addFolderActive}`):(styles.addFolder)}>
                                         <div className='d-flex'>
                                             <div><img src={addFolder} /></div>
                                             <div className='ms-3 mt-1'>{data.folderName}</div>
@@ -176,9 +184,9 @@ function HomePage(props) {
                         <div className={styles.showFileds}>
                             <ul>
                                 {
-                                    searchFile.map((fileValues)=>{
+                                    searchFile.map((fileValues, index)=>{
                                         return(
-                                            <div>
+                                            <div key={index}>
                                                 <li onClick={()=>{clickOpenFile(fileValues)}} className='mb-1'>
                                                     <button> <img src={searchIcon} className='me-2'/> {fileValues.fileName}</button>
                                                 </li>
@@ -198,9 +206,9 @@ function HomePage(props) {
                      <div className={styles.fileContainer}>
                         <div className='row'>
                             {
-                                fileNames.map((files)=>{
+                                fileNames.map((files, index)=>{
                                     return(
-                                            <div className='col-2 mt-5'>
+                                            <div key={index} className='col-2 mt-5'>
                                                 <button onClick={()=>{setFilePath(files.fileName)}} onDoubleClick={()=>{clickOpenFile(files)}} className={styles.file}>
                                                     <div className={styles.uploadFileIcon}><img src={uploadFile} /></div>
                                                     <div className={styles.fileName}>{files.fileName}</div>

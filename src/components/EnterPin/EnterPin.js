@@ -1,5 +1,5 @@
 import styles from './EnterPin.module.css'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OtpInput from "react18-input-otp";
 import axios from "axios";
 
@@ -12,7 +12,7 @@ function EnterPin(props) {
         isWarningKey:false,
         isBlank:false
     });
-    console.log(password.passcode)
+    // console.log(password.passcode)
     
     function changePassword(inputValue){
         setPassword({
@@ -24,7 +24,7 @@ function EnterPin(props) {
     }
 
     async function clickButton(){
-        const url = 'http://localhost:3001/getpassword'
+        const url = 'http://localhost:3001/api/security/getpassword'
         const passcode = await axios.get(url);
 
         if(password.passcode===''){
@@ -49,9 +49,12 @@ function EnterPin(props) {
                     isEnterPinKey:false, 
                     isSetPinKey:false
                     });
+                    localStorage.setItem('localStatus', JSON.stringify(false));
             }
         }
     }
+
+   
   
     return ( 
         <div className={styles.demo}>

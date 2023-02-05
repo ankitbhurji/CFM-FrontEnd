@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import axios from "axios";
 
 
-function SetPin() {
+function SetPin(props) {
 
     const [pin, setPin] = useState({
         pin:'',
@@ -12,6 +12,14 @@ function SetPin() {
         isUpdateKey:false,
         isBlank:false
     })
+
+    function afterPinSet(){
+        props.lockKey({ 
+            isFileKey:false, 
+            isSetPinKey:false,
+            isEnterPinKey:true
+          })
+    }
     
     async function clickSubmit(e){
         e.preventDefault();
@@ -21,7 +29,7 @@ function SetPin() {
                 setPin({...pin, isBlank:true})
             }else{
                 // setPin({...pin,  isWarningKey:false})
-                const url = 'http://localhost:3001/password'
+                const url = 'http://localhost:3001/api/security/password'
                 await axios.post(url, {
                     pin:pin.pin,
                     confirmPin:pin.confirmPin
@@ -32,6 +40,12 @@ function SetPin() {
                     confirmPin:'', 
                     isUpdateKey:true
                 })
+                // props.lockKey({ 
+                //     isFileKey:false, 
+                //     isSetPinKey:false,
+                //     isEnterPinKey:true
+                //   })
+                setTimeout(() => {afterPinSet();}, 2000)
             }
         }
         else{
@@ -43,6 +57,7 @@ function SetPin() {
         }
            
     }
+    console.log(typeof(parseInt(pin.pin)))
 
 
 
@@ -66,7 +81,8 @@ function SetPin() {
                                 })}} 
                                 value={pin.pin} 
                                 name='pin' 
-                                type="tel"  
+                                // type="tel" 
+                                type='password' 
                                 maxLength='4'
                         />
                         </div>
@@ -83,7 +99,8 @@ function SetPin() {
                                 })}}
                                 value={pin.confirmPin} 
                                 name='confirmPin' 
-                                type="tel" 
+                                // type="tel" 
+                                type='password' 
                                 maxLength='4'
                         />
                         </div>
@@ -94,7 +111,7 @@ function SetPin() {
                         {
                             pin.isWarningKey?(<p className={styles.warning}>pin does't match</p>)
                             :
-                            pin.isUpdateKey?(<p className={styles.success}>pin updated successfully !</p>)
+                            pin.isUpdateKey?(<p className={styles.success}>pin is updating please wait... !</p>)
                             :
                             pin.isBlank?(<p className={styles.warning}>please enter the pin</p>)
                             :

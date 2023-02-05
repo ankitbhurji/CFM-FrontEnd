@@ -44,6 +44,16 @@
     font-weight: bold;
     font-size: 20px;
     letter-spacing: 2px;
+    display: flex;
+    /* background-color: red; */
+    transition: 0.9s;
+}
+.saving{
+    margin-left: 50%;
+    font-size: 18px;
+    font-weight: 100;
+    color: #142683;
+    
 }
 label{
     font-family: DM Sans;

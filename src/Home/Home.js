@@ -6,8 +6,20 @@ import { useEffect, useState } from 'react';
 import AddFolder from '../components/AddFolder/AddFolder';
 import AddFile from '../components/AddFile/AddFile';
 import EditFile from '../components/EditFile/EditFile';
+import axios from 'axios';
+
+// import { useRef, useMemo } from 'react';
+// import JoditEditor from 'jodit-react';
+
 
 function Home() {
+
+    // const editor = useRef(null);
+	// const [content, setContent] = useState('');
+    // const config = {
+    //     buttons: ['bold', 'insertDate', 'italic', 'underline']
+    // }
+
 
     // const [allValues, setAllValues] = useState({
     //     folderName:'',
@@ -29,9 +41,33 @@ function Home() {
         isEditKey:false,
         updateKey:false
     })
-    console.log(keys, getFileNames)
+    // console.log(keys, getFileNames)
    
+    async function getStatus(){
+        
+        const localStatus = JSON.parse(localStorage.getItem('localStatus'))
+        
+        if(localStatus==null){
+            const url = "http://localhost:3001/api/security/password/status"
+            const status = await axios.get(url)
+            if(status.data){
+                setKeys({...keys, isEnterPinKey:true})
+            }else{
+                setKeys({...keys, isSetPinKey:true})
+            }
+        }else{
+            if(localStatus){
+                setKeys({...keys, isEnterPinKey:true})
+            }
+        }
+    }           
+
     
+
+
+    useEffect(()=>{
+        getStatus()     
+    }, [])
 
  
     
@@ -42,7 +78,7 @@ function Home() {
                 {
                 keys.isEnterPinKey?(<EnterPin lockKey={setKeys}/>)
                 :
-                keys.isSetPinKey?(<SetPin />)
+                keys.isSetPinKey?(<SetPin lockKey={setKeys} />)
                 :
                 keys.isFolderKey?(<AddFolder lockKey={setKeys}/>)
                 :
@@ -53,6 +89,15 @@ function Home() {
                 ("")
                 }
             </div>  
+
+            {/* <JoditEditor
+			ref={editor}
+			value={content}
+            config={config}
+            tabIndex={1}
+			onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+			// onChange={newContent => {setContent(newContent)}}
+		    /> */}
         </div>
      );
 }

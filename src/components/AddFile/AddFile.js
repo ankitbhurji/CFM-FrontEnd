@@ -12,10 +12,12 @@ function AddFile(props) {
     const [fileData, setFileData] = useState([])
 
     function clickButton(){
-      if(!(file.fileName==='')){
+      if(!(file.fileName==='') && !(file.fileName.trim().length==0)){
+        
         var test = fileData.filter((value)=>{
           return value.fileName==file.fileName
         })
+
         if(test.length>0){
           setFile({...file, isExistKey:true})
         }else{
@@ -39,8 +41,10 @@ function AddFile(props) {
         isExistKey:false
       })
       setFileData(props.getFileNames)
+      
     }
  
+
 
  
     return ( 

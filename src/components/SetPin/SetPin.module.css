@@ -50,6 +50,18 @@ label{
     margin-bottom: 6px;
     color: #566474;
 }
+.eyeContainer{
+    /* background-color: red; */
+    /* border: 1px solid green; */
+}
+.eyeIcon{
+    cursor: pointer;
+    margin-top: 8px;
+}
+.eyeIconCross{
+
+}
+
 input[type="password"], [type='text'], [type='tel']{
     outline: none;
     border: 1px solid #9EAAB7;
@@ -57,8 +69,14 @@ input[type="password"], [type='text'], [type='tel']{
     padding: 10px;
     padding-left: 20px;
     width: 100%;
+    /* border: none; */
+    /* background-image: url('../../Images/search.svg');
+    background-repeat: no-repeat;
+    padding-left: 55px;
+    background-size: 20px;
+    background-position: 280px 14px;
+    cursor: pointer; */
 }
-
 
 .ChangeButton{
     margin-top: 35px;

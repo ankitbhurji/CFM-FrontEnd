@@ -90,13 +90,14 @@
     margin-bottom: 10px;
     border: none;
     width: 100%;
-    transition: 0.4s;
+    transition: 0.5s;
 }
 .addFolder:focus{
-    background-color: #2b313a;
+    /* background-color: #2b313a; */
 }
 .addFolderActive{
-    background-color: #010934;
+    background-color: #445EE2;
+    color: white;
 }
 .warning{
     color: red;
@@ -291,7 +292,7 @@ input[type='search']{
 
 .border{
     /* border: 1px solid #EBF0F5;  */
-    border: 1px solid black; 
+    border: 1px solid #EBF0F5; 
     width: 94%; 
     /* margin-bottom: 5%; */
     margin-left: 50px;

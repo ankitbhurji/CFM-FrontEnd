@@ -14,14 +14,14 @@ function AddFolder(props) {
 
 
   async function clickButton(){
-    if(!(folder.folderName==='')){
+    if(!(folder.folderName==='') && !(folder.folderName.trim().length==0)){
       var test = existFolders.filter((value)=>{
         return value.folderName==folder.folderName
       })
         if(test.length>0){
           setFolder({...folder, isExistKey:true})
         }else{
-          const url = "http://localhost:3001/api/folder"
+          const url = "http://localhost:3001/api/details/folder"
           await axios.post(url, {
             folderName:folder.folderName
           })
@@ -33,10 +33,11 @@ function AddFolder(props) {
     }
   }
 
+  
       
 
   useEffect(()=>{
-    const url = 'http://localhost:3001/api/folder'
+    const url = 'http://localhost:3001/api/details/folder'
     axios.get(url).then(res => {
         setExistFolders(res.data)
     }).catch(err => console.log(err))
