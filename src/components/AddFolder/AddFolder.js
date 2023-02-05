@@ -22,7 +22,7 @@ function AddFolder(props) {
           setFolder({...folder, isExistKey:true})
         }else{
           // const url = "http://localhost:3001/api/details/folder"
-          const url = "https://cfm-app.onrender.com/details/folder"
+          const url = "https://cfm-app.onrender.com/api/details/folder"
           await axios.post(url, {
             folderName:folder.folderName
           })
