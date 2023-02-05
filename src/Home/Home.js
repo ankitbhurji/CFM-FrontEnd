@@ -48,7 +48,8 @@ function Home() {
         const localStatus = JSON.parse(localStorage.getItem('localStatus'))
         
         if(localStatus==null){
-            const url = "http://localhost:3001/api/security/password/status"
+            // const url = "http://localhost:3001/api/security/password/status"
+            const url = "https://cfm-app.onrender.com/api/security/password/status"
             const status = await axios.get(url)
             if(status.data){
                 setKeys({...keys, isEnterPinKey:true})

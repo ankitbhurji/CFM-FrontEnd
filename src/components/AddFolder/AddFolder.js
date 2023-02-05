@@ -21,7 +21,8 @@ function AddFolder(props) {
         if(test.length>0){
           setFolder({...folder, isExistKey:true})
         }else{
-          const url = "http://localhost:3001/api/details/folder"
+          // const url = "http://localhost:3001/api/details/folder"
+          const url = "https://cfm-app.onrender.com/details/folder"
           await axios.post(url, {
             folderName:folder.folderName
           })
@@ -37,7 +38,8 @@ function AddFolder(props) {
       
 
   useEffect(()=>{
-    const url = 'http://localhost:3001/api/details/folder'
+    // const url = 'http://localhost:3001/api/details/folder'
+    const url = 'https://cfm-app.onrender.com/api/details/folder'
     axios.get(url).then(res => {
         setExistFolders(res.data)
     }).catch(err => console.log(err))

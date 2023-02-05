@@ -24,7 +24,8 @@ function EnterPin(props) {
     }
 
     async function clickButton(){
-        const url = 'http://localhost:3001/api/security/getpassword'
+        // const url = 'http://localhost:3001/api/security/getpassword'
+        const url = 'https://cfm-app.onrender.com/api/security/getpassword'
         const passcode = await axios.get(url);
 
         if(password.passcode===''){

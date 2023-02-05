@@ -73,14 +73,16 @@ function EditFile(props) {
         // // if(!(allValues.fileData==='')){
         if(true){
           if(props.updateKey){
-            const url = 'http://localhost:3001/api/details/update'
+            // const url = 'http://localhost:3001/api/details/update'
+            const url = 'https://cfm-app.onrender.com/api/details/update'
             await axios.post(url, {
              folderName:allValues.folderName,
              fileName:props.fileData.fileData.fileName,
              fileData: content,
            });
           }else{
-            const url = 'http://localhost:3001/api/details/file'
+            // const url = 'http://localhost:3001/api/details/file'
+            const url = 'https://cfm-app.onrender.com/api/details/file'
             await axios.post(url, {
              folderName:allValues.folderName,
              fileName:allValues.fileName,

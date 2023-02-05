@@ -57,7 +57,8 @@ function HomePage(props) {
         })
     }
     async function clickFolderSelect(data){
-        const url = `http://localhost:3001/api/details/find/${data.folderName}`
+        // const url = `http://localhost:3001/api/details/find/${data.folderName}`
+        const url = `https://cfm-app.onrender.com/api/details/find/${data.folderName}`
         const AllFiles = await axios.get(url)
         setFileNames(AllFiles.data)
         setFolderName(data.folderName)
@@ -90,7 +91,8 @@ function HomePage(props) {
     }
     async function searchChange(searchFile){
         if(searchFile.length){
-            const url = `http://localhost:3001/api/details/search/${searchFile}`
+            // const url = `http://localhost:3001/api/details/search/${searchFile}`
+            const url = `https://cfm-app.onrender.com/api/details/search/${searchFile}`
             const search = await axios.get(url)
             setSearchFile(search.data)
         }
@@ -103,13 +105,15 @@ function HomePage(props) {
     }
 
     useEffect(()=>{
-        const url = 'http://localhost:3001/api/details/folder'
+        // const url = 'http://localhost:3001/api/details/folder'
+        const url = 'https://cfm-app.onrender.com/api/details/folder'
         axios.get(url).then(res => {
             setFoldersName(res.data)
         }).catch(err => console.log(err))
 
         if(!(folderName=='')){
-            const urlUpdate = `http://localhost:3001/api/details/find/${folderName}`
+            // const urlUpdate = `http://localhost:3001/api/details/find/${folderName}`
+            const urlUpdate = `https://cfm-app.onrender.com/api/details/find/${folderName}`
             axios.get(urlUpdate).then(res => {
                 setFileNames(res.data)
             }).catch(err => console.log(err));
