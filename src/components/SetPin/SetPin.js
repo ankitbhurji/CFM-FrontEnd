@@ -30,6 +30,7 @@ function SetPin(props) {
             }else{
                 // setPin({...pin,  isWarningKey:false})
                 const url = 'https://cfm-app.onrender.com/api/security/password'
+                // const url = 'http://localhost:3001/api/security/password'
                 await axios.post(url, {
                     pin:pin.pin,
                     confirmPin:pin.confirmPin

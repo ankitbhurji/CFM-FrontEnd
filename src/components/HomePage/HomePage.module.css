@@ -179,7 +179,7 @@
     background-color: white;
     padding-right: 40px;
 }
-input[type='search']{
+/* input[type='search']{
     margin-top: 42px;
     width: 486px;
     margin-left: 50px;
@@ -197,9 +197,9 @@ input[type='search']{
     font-weight: bold;
     Font-family: DM Sans;
     Font-size: 20px
-}
+} */
 .search{
-    margin-top: 42px;
+    /* margin-top: 42px; */
     /* margin-top: 42px;
     width: 486px;
     margin-left: 50px;

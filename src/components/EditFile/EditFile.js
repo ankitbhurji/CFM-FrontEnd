@@ -6,6 +6,7 @@ import { useRef, useMemo } from 'react';
 import JoditEditor from 'jodit-react';
 
 
+
 function EditFile(props) {
 
   const editor = useRef(null);
@@ -44,6 +45,7 @@ function EditFile(props) {
     // fileData:props.fileData.fileData.fileData, 
   })
 
+
     // console.log('filename', props.fileData.fileData.fileName)
     // console.log('filename', props.props.fileName)
     // console.log('filedata', props.fileData.fileData.fileData)
@@ -58,6 +60,7 @@ function EditFile(props) {
     // props.fileUpdatedData(allValues.fileData)
     setContent(value)
     isSetDebouncing(true)
+
     setTimeout(() => {
       Debounce()
     }, 2000);

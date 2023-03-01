@@ -1,0 +1,289 @@
+body{
+    background-color: rgb(143, 141, 141);
+}
+.home_container{
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: auto;
+    /* background-color: gray; */
+    width: 1500px;
+    padding: 10px;
+    margin: 10px auto 0;
+}
+.left_container{
+    /* background-color: cyan; */
+    background-color: #E5E5E5;
+    border-radius: 10px 0 0 10px;
+    background-image: url('https://img.freepik.com/free-photo/gray-elegant-background-with-copy-space_24972-1805.jpg?w=996&t=st=1677702087~exp=1677702687~hmac=8bdfb7975f18edc2e239197fdf3af082b959408b7ba66abde09880a5b64dcf3a');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 60px 60px 400px 80px;
+    padding: 40px
+}
+.logo_container{
+    /* background-color: purple; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.logo_image{
+    height: 40px;
+    width: 40px;
+}
+.logo_name {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 23px;
+    /* background: linear-gradient(to right, #FFF 20%, #FF0 40%, #FF0 60%, #FFF 80%); */
+    background: linear-gradient(to right, #FFF 20%, #FFB03A 30%, #FFF 40%);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 5s linear infinite;
+    }
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+.file_folder_icon_container{
+    /* background-color: pink; */
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 5px;
+}
+.add_file{
+    cursor: pointer;
+    height: 40px;
+    transition: 0.2s;
+}
+.add_file:hover{
+    opacity: 0.5;
+    border-radius: 5px;
+    height: 40px;
+}
+.add_folder{
+    cursor: pointer;
+    height: 40px;
+    transition: 0.2s;
+}
+.add_folder:hover{
+    opacity: 0.5;
+    border-radius: 5px;
+    height: 38px;
+}
+.folder_container{
+    /* background-color: aquamarine; */
+    overflow: auto;
+    padding: 0 0 25px 0;
+}
+.folder{
+    background-color:#EBF0F5;
+    display: flex;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #566474;
+    font-family: DM Sans;
+    font-style: Regular;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.folder:hover{
+    opacity: 0.6;
+}
+.addFolderActive{
+    background-color: #566474;
+    color: white;
+}
+.folder_icon{
+    width: 40px;
+}
+.lock_container{
+    /* background-color: brown; */
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    padding: 5px;
+}
+.lock_icon{
+    width: 20PX;
+    margin: 0 15px 0 0;
+}
+.lock_button{
+    background-color: #445EE2;
+    border: none;
+    padding: 0px;
+    width: 80%;
+    border-radius: 8px;
+
+    font-size: 20px;
+    font-family: DM Sans;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    transition: 0.2s;
+}
+.lock_button:hover{
+    opacity: 0.5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.right_container{
+    /* background-color: burlywood; */
+    background-color: #FFFFFF;
+    background-image: url('https://img.freepik.com/free-vector/gradient-white-monochrome-background_23-2149020688.jpg?w=996&t=st=1677702022~exp=1677702622~hmac=4980928dbd5629472f29c15df6b7ac9782fddf962374f248fd0399f78c5974d3');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 50px 1fr;
+    padding-left: 50px;
+    border-radius: 0 10px 10px 0;
+}
+.top_bar{
+    /* background-color: green; */
+    display: flex;
+    justify-content: space-between;
+}
+.search_container{
+    width: 40%;
+}
+input[type='search']{
+    background: none;
+    padding: 2px 0 2px 10px;
+    width: 486px;
+    border: none;
+    outline: none;
+    border: 1px solid #566474;
+    height: 44px;
+    /* position: absolute; */
+    background-image: url('../../Images/search.svg');
+    background-repeat: no-repeat;
+    padding-left: 55px;
+    background-size: 14px;
+    background-position: 14px 14px;
+    color: #1E272E;
+    font-weight: bold;
+    Font-family: DM Sans;
+    Font-size: 20px
+}
+.search_ul{
+    margin-top: 14%;
+}
+.search_li{
+  font-size: 18px;
+  font-weight:bold;
+  list-style-type: none;
+
+  width: 400px;
+  text-align: left;
+  border: none;
+  background-color: #E5E5E5;
+  list-style-type:none;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.search_button{
+    border: none;
+}
+.reset_logout_container{
+    display: flex;
+    width: 100px;
+    justify-content: space-between;
+}
+.reset_container{
+    height: 45px;
+    cursor: pointer;
+    border: 2px solid rgb(135, 134, 134);
+    border-radius: 5px;
+    transition: 0.2s;
+}
+.reset_container:hover{
+    opacity: 0.5;
+}
+.logout_container{
+    padding: 5px 0 0 12px;
+    border: 1px solid white;
+    height: 44px;
+    border-radius: 5px;
+    width: 42px;
+    cursor: pointer;
+    border: 2px solid rgb(145, 145, 145);
+    transition: 0.2s;
+}
+.logout_container:hover{
+    opacity: 0.5;
+}
+.selected_file_folder{
+    /* background-color: peru; */
+    margin-top: 25px;
+}
+.line{
+    /* border: 2px solid green; */
+    border-radius: 5px;
+}
+.selected_file_folder{
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #566474;
+}
+.file_container{
+    /* background-color: cadetblue; */
+    display: grid;
+    grid-template-columns: repeat(9, 100px);
+    grid-row-gap: 30px;
+    grid-column-gap: 14px;
+
+    height: 450px;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 10px 0 0 0;
+    margin-top: 50px;
+    font-family: DM Sans;
+    font-style: Regular;
+    font-size: 15px;
+    color: #1E272E;
+}
+.upload_file{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    /* background-color: red; */ 
+}
+
+.warning{
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}

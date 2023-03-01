@@ -1,23 +1,21 @@
 .demo{
     position: fixed;
     background-color: rgba(30, 39, 46, 0.9);
-    height: 89vh;
-    width: 1280px;
+    /* height: 100vh; */
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: auto;
     margin-bottom: auto;
-
-    animation: mymove 0.4s ;
-    animation-timing-function: linear;
 }
-@keyframes mymove {
+/* @keyframes mymove {
     from {left: 0px;}
     to {left: 130px;}
     from {background-color: rgba(30, 39, 46);}
     to {background-color: rgba(30, 39, 46, 0.9);}
-}
+} */
 .LockContainer{
     width: 400px;
     height: 306px;

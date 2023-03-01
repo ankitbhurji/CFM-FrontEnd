@@ -117,7 +117,6 @@ function HomePage(props) {
             axios.get(urlUpdate).then(res => {
                 setFileNames(res.data)
             }).catch(err => console.log(err));
-            
         }
     }, [props, folderName])
     // }, [props, foldersName, folderName])
