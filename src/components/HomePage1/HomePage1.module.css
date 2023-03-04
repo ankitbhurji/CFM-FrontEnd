@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(143, 141, 141);
+    background-color: rgba(140, 140, 140, 0.7);
 }
 .home_container{
     display: grid;
@@ -15,6 +15,7 @@ body{
     background-color: #E5E5E5;
     border-radius: 10px 0 0 10px;
     background-image: url('https://img.freepik.com/free-photo/gray-elegant-background-with-copy-space_24972-1805.jpg?w=996&t=st=1677702087~exp=1677702687~hmac=8bdfb7975f18edc2e239197fdf3af082b959408b7ba66abde09880a5b64dcf3a');
+
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
